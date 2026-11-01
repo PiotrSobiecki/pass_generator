@@ -1,4 +1,5 @@
 import * as readline from 'readline';
+import { randomInt } from 'crypto';
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -13,7 +14,9 @@ function generatePassword(passwordLength: number): string {
 
     let password = '';
     for (let i = 0; i < passwordLength; i++) {
-        let index = Math.floor(Math.random() * characters.length);
+        // Math.random nie jest kryptograficznie bezpieczny; randomInt losuje
+        // z CSPRNG bez modulo bias.
+        const index = randomInt(characters.length);
         password += characters.charAt(index);
     }
 
