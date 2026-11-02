@@ -1,3 +1,4 @@
+var randomInt = require('crypto').randomInt;
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var readline = require("readline");
@@ -12,7 +13,7 @@ function generatePassword(passwordLength) {
     }
     var password = '';
     for (var i = 0; i < passwordLength; i++) {
-        var index = Math.floor(Math.random() * characters.length);
+        var index = randomInt(characters.length); // CSPRNG, bez modulo bias
         password += characters.charAt(index);
     }
     return password;
